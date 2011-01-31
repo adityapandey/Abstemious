@@ -30,4 +30,44 @@ public class Transaction implements Serializable {
     this.amountPaid = amountPaid;
     this.userId = userId;
   }
+
+  public Key<Expense> getExpenseId() {
+    return expenseId;
+  }
+
+  public void setExpenseId(Key<Expense> expenseId) {
+    this.expenseId = expenseId;
+  }
+
+  public Key<User> getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Key<User> userId) {
+    this.userId = userId;
+  }
+
+  public double getAmountPaid() {
+    return amountPaid;
+  }
+
+  public void setAmountPaid(double amountPaid) {
+    this.amountPaid = amountPaid;
+  }
+
+  public double getAmountOwed() {
+    return amountOwed;
+  }
+
+  public void setAmountOwed(double amountOwed) {
+    this.amountOwed = amountOwed;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public Date getTimestamp() {
+    return timestamp;
+  }
 }

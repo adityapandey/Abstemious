@@ -4,7 +4,6 @@ import com.cunningstunts.abstemious.client.presenter.LoginStatusPresenter;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 
 public class LoginStatusView extends Composite implements LoginStatusPresenter.UI {
 
@@ -18,10 +17,5 @@ public class LoginStatusView extends Composite implements LoginStatusPresenter.U
   @Override
   public HasClickHandlers getLoginButton() {
     return loginButton;
-  }
-
-  @Override
-  public Widget asWidget() {
-    return this;
   }
 }

@@ -3,6 +3,7 @@ package com.cunningstunts.abstemious.client.presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
@@ -14,9 +15,11 @@ public class LoginStatusPresenter implements Presenter {
   }
 
   private final UI ui;
+  private final EventBus eventBus;
 
-  public LoginStatusPresenter(UI ui) {
+  public LoginStatusPresenter(UI ui, EventBus eventBus) {
     this.ui = ui;
+    this.eventBus = eventBus;
     bindHandlers();
   }
 
