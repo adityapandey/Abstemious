@@ -10,7 +10,15 @@
     <servlet-name>backend-debug</servlet-name>
     <servlet-class>com.cunningstunts.abstemious.backend.DebugServlet</servlet-class>
   </servlet>
-
+  <servlet>
+    <servlet-name>loginService</servlet-name>
+    <servlet-class>com.cunningstunts.abstemious.server.login.LoginServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>loginService</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>backend-debug</servlet-name>
     <url-pattern>/debug</url-pattern>
