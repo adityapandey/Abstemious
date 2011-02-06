@@ -2,6 +2,8 @@ package com.cunningstunts.abstemious.client;
 
 import com.cunningstunts.abstemious.client.event.AddExpenseEvent;
 import com.cunningstunts.abstemious.client.event.AddExpenseEventHandler;
+import com.cunningstunts.abstemious.client.event.LoginEvent;
+import com.cunningstunts.abstemious.client.event.LoginEventHandler;
 import com.cunningstunts.abstemious.client.presenter.LoggedOutPresenter;
 import com.cunningstunts.abstemious.client.presenter.MainPresenter;
 import com.cunningstunts.abstemious.client.presenter.Presenter;
@@ -33,6 +35,16 @@ public class Application implements Presenter, ValueChangeHandler<String> {
         GWT.log("AddExpenseEvent: " + addExpenseEvent.toDebugString());
       }
     });
+    eventBus.addHandler(LoginEvent.TYPE, new LoginEventHandler() {
+      @Override
+      public void onLoginEvent(LoginEvent event) {
+        if (event.isLoggedIn()) {
+          History.newItem("landing");
+        } else {
+          History.newItem("loggedout");
+        }
+      }
+    });
   }
 
   @Override
@@ -40,7 +52,7 @@ public class Application implements Presenter, ValueChangeHandler<String> {
     this.container = container;
 
     if ("".equals(History.getToken())) {
-      History.newItem("landing");
+      History.newItem("loggedout");
     } else {
       History.fireCurrentHistoryState();
     }
@@ -65,12 +77,10 @@ public class Application implements Presenter, ValueChangeHandler<String> {
     if (token.equals("loggedout")) {
       // User is logged out.
       GWT.runAsync(new RunAsyncCallback() {
-
         @Override
         public void onSuccess() {
           new LoggedOutPresenter(new LoggedOutView(), eventBus).go(container);
         }
-
         @Override
         public void onFailure(Throwable reason) {
           GWT.log("token loggedout", reason);
@@ -79,12 +89,10 @@ public class Application implements Presenter, ValueChangeHandler<String> {
     } else if (token.equals("landing")) {
       // Landing page.
       GWT.runAsync(new RunAsyncCallback() {
-
         @Override
         public void onSuccess() {
           new MainPresenter(new MainView(), eventBus).go(container);
         }
-
         @Override
         public void onFailure(Throwable reason) {
           GWT.log("token landing", reason);
