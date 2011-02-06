@@ -6,6 +6,15 @@
 <web-app>
   
   <!-- Servlets -->
+  <servlet>
+    <servlet-name>backend-debug</servlet-name>
+    <servlet-class>com.cunningstunts.abstemious.backend.DebugServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>backend-debug</servlet-name>
+    <url-pattern>/debug</url-pattern>
+  </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>
