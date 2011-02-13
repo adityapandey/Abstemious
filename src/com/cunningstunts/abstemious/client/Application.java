@@ -7,6 +7,7 @@ import com.cunningstunts.abstemious.client.event.LoginEventHandler;
 import com.cunningstunts.abstemious.client.presenter.LoggedOutPresenter;
 import com.cunningstunts.abstemious.client.presenter.MainPresenter;
 import com.cunningstunts.abstemious.client.presenter.Presenter;
+import com.cunningstunts.abstemious.client.util.LoggingHelper;
 import com.cunningstunts.abstemious.client.view.LoggedOutView;
 import com.cunningstunts.abstemious.client.view.MainView;
 import com.google.gwt.core.client.GWT;
@@ -32,7 +33,7 @@ public class Application implements Presenter, ValueChangeHandler<String> {
     eventBus.addHandler(AddExpenseEvent.TYPE, new AddExpenseEventHandler() {
       @Override
       public void onAddExpense(AddExpenseEvent addExpenseEvent) {
-        GWT.log("AddExpenseEvent: " + addExpenseEvent.toDebugString());
+        LoggingHelper.log("AddExpenseEvent: " + addExpenseEvent.toDebugString());
       }
     });
     eventBus.addHandler(LoginEvent.TYPE, new LoginEventHandler() {
@@ -63,13 +64,13 @@ public class Application implements Presenter, ValueChangeHandler<String> {
   // call Presenter.go(this.container).
   @Override
   public void onValueChange(ValueChangeEvent<String> event) {
-    GWT.log("onValueChanged " + event.toDebugString());
+    LoggingHelper.log("onValueChanged " + event.toDebugString());
     String token = event.getValue();
     if (token != null) {
       // Do something with history token
       navigateTo(token);
     } else {
-      GWT.log("null token in Apllication.onValueChanged");
+      LoggingHelper.log("null token in Application.onValueChanged");
     }
   }
 
@@ -83,7 +84,7 @@ public class Application implements Presenter, ValueChangeHandler<String> {
         }
         @Override
         public void onFailure(Throwable reason) {
-          GWT.log("token loggedout", reason);
+          LoggingHelper.log("token loggedout", reason);
         }
       });
     } else if (token.equals("landing")) {
@@ -95,7 +96,7 @@ public class Application implements Presenter, ValueChangeHandler<String> {
         }
         @Override
         public void onFailure(Throwable reason) {
-          GWT.log("token landing", reason);
+          LoggingHelper.log("token landing", reason);
         }
       });
     }

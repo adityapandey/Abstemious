@@ -11,10 +11,10 @@ public class Abstemious implements EntryPoint {
 
   public void onModuleLoad() {
     EventBus eventBus = new SimpleEventBus();
-    Application abstemious = new Application(eventBus);
+    Application application = new Application(eventBus);
     LoginStatusPresenter loginStatusPresenter =
         new LoginStatusPresenter(new LoginStatusView(), eventBus);
     loginStatusPresenter.go(RootPanel.get("loginbox"));
-    abstemious.go(RootPanel.get("abstemiousframe"));
+    application.go(RootPanel.get("abstemiousframe"));
   }
 }

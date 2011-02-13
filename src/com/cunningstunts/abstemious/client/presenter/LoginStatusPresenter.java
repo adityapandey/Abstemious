@@ -2,6 +2,7 @@ package com.cunningstunts.abstemious.client.presenter;
 
 import com.cunningstunts.abstemious.client.event.LoginEvent;
 import com.cunningstunts.abstemious.client.event.LoginEventHandler;
+import com.cunningstunts.abstemious.client.util.LoggingHelper;
 import com.cunningstunts.abstemious.shared.login.LoginInfo;
 import com.cunningstunts.abstemious.shared.login.LoginService;
 import com.cunningstunts.abstemious.shared.login.LoginServiceAsync;
@@ -38,7 +39,7 @@ public class LoginStatusPresenter implements Presenter {
     eventBus.addHandler(LoginEvent.TYPE, new LoginEventHandler() {
       @Override
       public void onLoginEvent(LoginEvent event) {
-        GWT.log("Login event");
+        LoggingHelper.log("Login event");
         if (event.isLoggedIn()) {
           ui.setUserName(event.getLoginInfo().getUserName());
           ui.setLoginLink("Logout", event.getLoginInfo().getLogoutUrl());
@@ -58,18 +59,18 @@ public class LoginStatusPresenter implements Presenter {
   }
 
   private void tryToLogin() {
-    GWT.log("Trying to get login information");
+    LoggingHelper.log("Trying to get login information");
     loginService.getLoginInfo(REDIRECT_URL, new AsyncCallback<LoginInfo>() {
       @Override
       public void onSuccess(LoginInfo result) {
-        GWT.log("Got logininfo for: " + result.getUserId());
+        LoggingHelper.log("Got logininfo for: " + result.getUserId());
         LoginEvent loginEvent = new LoginEvent();
         loginEvent.setLoginInfo(result);
         eventBus.fireEventFromSource(loginEvent, this);
       }
       @Override
       public void onFailure(Throwable caught) {
-        GWT.log("LoginService.getLoginInfo", caught);
+        LoggingHelper.log("LoginService.getLoginInfo", caught);
       }
     });
   }
